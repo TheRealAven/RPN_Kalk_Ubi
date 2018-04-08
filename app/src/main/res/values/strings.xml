@@ -26,6 +26,12 @@
         <item>0</item>
         <item>-1</item>
     </string-array>
+    <string-array name="chooseColors">
+        <item>white</item>
+        <item>red</item>
+        <item>green</item>
+        <item>blue</item>
+    </string-array>
 
     <!-- Example settings for Data & Sync -->
     <string name="pref_header_data_sync">Data &amp; sync</string>

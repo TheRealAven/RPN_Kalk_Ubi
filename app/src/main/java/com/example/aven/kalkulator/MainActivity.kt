@@ -22,6 +22,7 @@ class MainActivity : AppCompatActivity() {
     var isFraction: Boolean = false
     val REQUEST_CODE = 10000
     var selectedPrecision: Int = 10
+    var currentColor: String = "white"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -135,9 +136,14 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun loadOptions(color: String, prec: Int){
-        stackEdit.setBackgroundColor(Color.parseColor(color))
-        selectedPrecision = prec
-        kalkulator.setPrecision(prec)
+        try {
+            stackEdit.setBackgroundColor(Color.parseColor(color))
+            currentColor=color
+            selectedPrecision = prec
+            kalkulator.setPrecision(prec)
+        }catch (e: IllegalArgumentException){
+            e.printStackTrace()
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -163,10 +169,12 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         if(item?.getItemId()==R.id.settings){
             val i= Intent(this, SettingActivity::class.java)
+            i.putExtra("curKol", currentColor)
+            i.putExtra("curPrec", selectedPrecision)
             startActivityForResult(i, REQUEST_CODE)
             return true
-        }else {
-            return super.onOptionsItemSelected(item)
+        }else{
+            return false
         }
     }
 

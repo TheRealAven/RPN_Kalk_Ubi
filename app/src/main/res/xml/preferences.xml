@@ -8,8 +8,8 @@
     <ListPreference
         android:key="color_preference"
         android:title="Kolor tla: "
-        android:entries="@id/colors"
-        android:entryValues="@id/colors"
+        android:entries="@array/chooseColors"
+        android:entryValues="@array/chooseColors"
         android:defaultValue="white"
         />
 </PreferenceScreen>

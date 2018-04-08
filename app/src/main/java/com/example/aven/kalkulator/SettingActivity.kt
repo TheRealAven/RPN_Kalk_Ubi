@@ -7,25 +7,30 @@ import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_setting.*
 
 class SettingActivity : AppCompatActivity() {
-    var kolory: ArrayList<String> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_setting)
+        if((intent.hasExtra("curCol"))&&(intent.hasExtra("curPrec"))) {
+            val extras = intent.extras ?: return
+            val curCol = extras.getString("curKol")
+            kolorEdit.setText(curCol)
+            val curP = extras.getInt("curPrec")
+            precisionEdit.setText(curP)
+        }
 
-        kolory.add("white")
-        kolory.add("red")
-        kolory.add("green")
-        kolory.add("blue")
+        potwierdzButton.setOnClickListener {
+            finish()
+        }
     }
 
     override fun finish() {
         val data = Intent()
 
-        data.putExtra("Kolor", kolory[kolorListView.selectedId.toInt()])
+        data.putExtra("Kolor", kolorEdit.text.toString())
         val nP = precisionEdit.text.toString().toInt()
         data.putExtra("Precyzja", nP)
-        setResult(Activity.RESULT_OK)
+        setResult(Activity.RESULT_OK, data)
 
         super.finish()
     }
